@@ -34,24 +34,35 @@ class PostController extends Controller
     	$data= $request->all();
         
         //validations
-        $rules=[
-            'title'=>'required',
+        $messages=[
+            'title.required'=>trans('translation.post_title'),
+
+        ];
+       
+        $this->validate($request, [
+        'title'=>'required',
             'body'=>'required',
             'url'=>'image|mimes:jpg,jepg,gif,png',
-        ]; 
-        $validator= Validator::make($data,$rules);
+          ],$messages);
 
 
         //Add data to DB
+        $post = new Post;
+        $post->title = request('title');
+        $post->body = request('body');
+        
+        if ($request->has('url'))
+        {
         $img_name = time(). "." .$request->url->getClientOriginalExtension();
-    	$post = new Post;
-    	$post->title = request('title');
-    	$post->body = request('body');
+    	
         $post->url= $img_name; // instead of image
-        $post-> save();
+        
         $request->url->move(public_path('upload'), $img_name); 
         //we can also  use creat method == Post::create(request()->all()); instead of object method
-    	return redirect('/posts');
+    	 };
+         $post-> save();
+
+         return redirect('/posts');
         }
 
 
@@ -70,8 +81,10 @@ class PostController extends Controller
     {
      //to get all users from data base
      $users =User::all();  
+
      $stop_comment=DB::table('settings')->where('name','stop_comment')->value('value');
       $stop_register=DB::table('settings')->where('name','stop_register')->value('value');
+      
         return view('content.admin',compact('users','stop_comment','stop_register') );
     }
 

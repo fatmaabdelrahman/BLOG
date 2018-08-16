@@ -77,7 +77,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+    //'locale' => 'en',
+    'locale' => env('APP_Languages','ar'),
 
     /*
     |--------------------------------------------------------------------------
@@ -90,7 +91,9 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    //'fallback_locale' => 'en',
+    'fallback_locale' => env('Fallback_Languages','ar'),
+
 
     /*
     |--------------------------------------------------------------------------

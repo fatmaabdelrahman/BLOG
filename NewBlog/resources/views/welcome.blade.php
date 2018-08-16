@@ -5,10 +5,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title> Laravel </title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
         <!-- Styles -->
         <style>
@@ -63,6 +64,11 @@
                 margin-bottom: 30px;
             }
         </style>
+        @if(app()->getLocale() == 'en')
+          <link rel="stylesheet" href="css/ltr-app.css">
+        @else
+          <link rel="stylesheet" href="css/rtl-app.css"> 
+         @endif
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -76,20 +82,24 @@
                     @endif
                 </div>
             @endif
+             <div class="dropdown">
+                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{__('translation.btn')}} </button>
+                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{{route('switchLan','en')}}"> {{__('translation.english')}}</a>
+                            <a class="dropdown-item" href="{{route('switchLan','ar')}}"> {{__('translation.arabic')}}</a>
+                        </div>
+                </div>
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    {{__('translation.title')}}
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                  
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     </body>
 </html>

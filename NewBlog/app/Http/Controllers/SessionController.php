@@ -16,7 +16,7 @@ class SessionController extends Controller
     {
     	if(!auth()->attempt(request(['email','password']))){
     		return back()->WithErrors([
-    			'message'=>'Email or password not correct'
+    			'message'=> trans('validation.email'),
     		]);
     	}
 

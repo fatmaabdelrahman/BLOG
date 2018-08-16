@@ -14,6 +14,35 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+/////// for Localization//////////
+Route::group(['middleware'=>'Localization'], function(){
+	Route::get('locale/{locale}',function($locale){
+	    Session::put('locale',$locale);
+	    return redirect()->back();
+	})->name('switchLan');
+
+
+});
+
+
+/////////subscribers//////////
+Route::get('/subscribe','Subscribers@show');
+Route::post('/subscribe/store','Subscribers@store');
+Route::get('admin/subscribers','Subscribers@admin_show');
+Route::post('/add-role','Subscribers@send_message');
+
+
+//////// For sent one mail list///////
+Route::get('send/message', function(){
+	Mail::to(['test@example.com', 'fatma@test.com' , 'nona@yahoo.com'])->send(new App\Mail\TestMailable('custom message'));
+	return 'hello';
+});
+ 
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 Route::get('/posts','PostController@posts');
 Route::get('posts/{post}','PostController@post');
 Route::post('/posts/store','PostController@store'); // admin

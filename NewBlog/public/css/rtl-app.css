@@ -1,0 +1,12 @@
+.title{
+
+    text-align:right;
+
+}
+
+.dropdown-menu.show {
+	position:relative;
+	top:0px;
+    text-align: right;
+
+}
